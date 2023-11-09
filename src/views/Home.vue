@@ -98,7 +98,7 @@ const articlesData = reactive([
     avatarUrl:
       "https://us.123rf.com/450wm/krayout/krayout1405/krayout140500351/28202051-activit%C3%A9s-de-loisirs-de-photographe-de-fille-beau-temps.jpg?ver=6",
     imageUrl:
-      "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+      "https://lh3.googleusercontent.com/p/AF1QipNlza0i2iQ3CNovEADKnrTnBLfRNozjG_1orV14=s1360-w1360-h1020",
   },
 ]);
 </script>
