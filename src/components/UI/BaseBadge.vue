@@ -10,7 +10,6 @@ import { computed, toRefs, reactive } from "vue";
 const props = defineProps(["type", "title"]);
 const { type, title } = toRefs(props);
 const badgeTitle = computed(() => title.value.toLowerCase());
-console.log(badgeTitle);
 
 const activeFilters = reactive({
   story: true,
