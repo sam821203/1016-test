@@ -87,6 +87,19 @@ const articlesData = reactive([
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPlTcbq_bTnbLYF5neW-ThD8anLndOaqdmFxLfyKGYylokA-pggFERHtq3QPPc0q9z7To&usqp=CAU",
     ],
   },
+  {
+    id: new Date().getTime(),
+    title: "我好像為什麼事情很悲唉，我想起生命",
+    author: "張杰敏",
+    content:
+      "我好像為什麼事情很悲唉，我想起生命是一場無盡的旅程，充滿了起伏和挑戰。我们经历了成功和失败，欢笑和眼泪，但正是这些经历塑造了我们的性格和使命",
+    datePosted: new Date().toLocaleDateString("en-US"),
+    categories: ["美文", "故事", "精選優質"],
+    avatarUrl:
+      "https://us.123rf.com/450wm/krayout/krayout1405/krayout140500351/28202051-activit%C3%A9s-de-loisirs-de-photographe-de-fille-beau-temps.jpg?ver=6",
+    imageUrl:
+      "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  },
 ]);
 </script>
 
