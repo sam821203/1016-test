@@ -96,7 +96,8 @@ const articlesData = reactive([
                 <span class="like">點讚 231</span>・ <span>收藏 1236</span>・ <span>評論 191</span>・
                 <span>觀看 405</span>
             </div>
-            <div>我是 developer 1</div>
+            <div>我是新的 developer 1</div>
+            <div>新的喔~</div>
         </div>
     </main>
 </template>
