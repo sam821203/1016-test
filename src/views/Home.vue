@@ -52,9 +52,7 @@ const articlesData = reactive([
             <h2>reset 2</h2>
             <h3>reset 3</h3>
             <h3>{{ article.title }}</h3>
-            <<<<<<< HEAD =======
             <h3>我是 Developer 2</h3>
-            >>>>>>> eb7c5b280ec9146b31d6f4d8f8b96ae83faa5431
             <template v-if="article.categories.includes('美文')">
                 <div class="content-wrap single-img">
                     <div class="info">
