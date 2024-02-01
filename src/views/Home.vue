@@ -91,6 +91,7 @@ const articlesData = reactive([
                     </div>
                 </div>
             </template>
+            <div>更新</div>
             <div class="extra-info-wrap">
                 <BaseBadge v-for="cat in article.categories" :key="cat" :type="cat" :title="cat" />
                 <span class="like">點讚 231</span>・ <span>收藏 1236</span>・ <span>評論 191</span>・
