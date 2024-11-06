@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>構造器模式</title>
+  </head>
+  <body>
+    <script>
+      // 第一層 Product
+      class Hamburger {
+        constructor() {
+          this._bread = "";
+          this._meat = "";
+        }
+
+        setBread(bread) {
+          this._bread = bread;
+          return this;
+        }
+
+        setMeat(meat) {
+          this._meat = meat;
+          return this;
+        }
+
+        info() {
+          console.log(`我是一個漢堡，麵包是${this._bread}，肉是${this._meat}`);
+        }
+      }
+
+      // let McFish = new Hamburger();
+      // McFish.setBread('漢堡麵包')
+      // McFish.setMeat('炸魚排')
+      // McFish.info()
+
+      // 產品結果 Builder
+      class McFishBuilder {
+        constructor() {
+          this.h = null;
+        }
+
+        create() {
+          this.h = new Hamburger();
+        }
+
+        step1() {
+          this.h.setBread("漢堡麵包");
+        }
+
+        step2() {
+          this.h.setMeat("炸魚排");
+        }
+
+        getHamburger() {
+          return this.h;
+        }
+      }
+
+      // 產品結果 Builder
+      class BigMacBuilder {
+        constructor() {
+          this.h = null;
+        }
+
+        create() {
+          this.h = new Hamburger();
+        }
+
+        step1() {
+          this.h.setBread("大麥克麵包");
+        }
+
+        step2() {
+          this.h.setMeat("雙層牛肉");
+        }
+
+        getHamburger() {
+          return this.h;
+        }
+      }
+
+      // 具體 Builder / Director
+      class McDonald {
+        constructor() {
+          this._builder = null;
+        }
+
+        setHamburgerBuilder(builder) {
+          this._builder = builder;
+        }
+
+        getHamburger() {
+          this._builder.create();
+          this._builder.step1();
+          this._builder.step2();
+          return this._builder.getHamburger();
+        }
+      }
+
+      const M = new McDonald();
+      const MFB = new McFishBuilder();
+      const BFB = new BigMacBuilder();
+
+      M.setHamburgerBuilder(MFB);
+      let h1 = M.getHamburger();
+      h1.info();
+
+      M.setHamburgerBuilder(BFB);
+      let h2 = M.getHamburger();
+      h2.info();
+
+      const bBFB = new BigMacBuilder();
+      const bMFB = new McFishBuilder();
+
+      const hamburgerFactory = (type) => {
+        const M = new McDonald();
+        let builder = null;
+        switch (type) {
+          case "麥香魚":
+            builder = bMFB;
+            break;
+          case "大麥克":
+            builder = bBFB;
+            break;
+        }
+
+        M.setHamburgerBuilder(builder);
+        return M.getHamburger();
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Prototype pattern</title>
+    </head>
+    <body>
+        <script>
+            // 萬物皆物件，物件在上去就沒東西了
+            // 原型鏈的概念是，當我們要讀取一個物件的屬性或方法時，會先從物件本身找，找不到就會往上找，找到為止
+            // A.原型1.原型2.Object，這時如果想復寫原型2的方法，就可以直接在 A 或原型1上寫，這樣所有的物件都會跟著改
+
+            // 1. prototype > 用來設定
+
+            // 2. __proto__ > 用來讀取
+
+            // 3. [[prototype]]
+
+            function Role (name) {
+                this.name = name;
+            }
+
+            Role.prototype.greeting = function () {
+                console.log('Hello, I am ' + this.name);
+            }
+
+            // A.__proto__ === Role.prototype
+            // A 的 proto 其實就是 Role 的 prototype 做出來的物件
+            // 這時如果 Role 的 prototype 改了，A 的 proto 也會跟著改
+            let A = new Role('Sam');
+            let B = new Role('Tina');
+            console.log(A);
+            console.log(B);
+
+            // Wizard 如何取得 Role 功能
+            // 傳統的建構函式 function Wizard(name) {} 才能使用 prototype
+            function Wizard (name) {
+                Role.call(this, name);
+            }
+
+            Wizard.prototype.attack = function () {
+                console.log('attack !!!');
+            }
+
+            let W = new Wizard('Tina');
+            W.attack()
+
+            // Wizard.prototype.__proto__ = Role.prototype;
+            console.log(W);
+
+            Wizard.prototype.__proto__ = Role.prototype;
+            W.greeting();
+
+            function SuperWizard(name) {
+                Wizard.call(this, name);
+            }
+
+            SuperWizard.prototype.__proto__ = Wizard.prototype;
+            // 覆寫掉 attack 函式
+            SuperWizard.prototype.attack = function() {
+                console.log('Super attack !!!');
+            }
+
+            // S > SuperWizard > Wizard > Role > object
+            // SuperWizard 是 S 的 __proto__，依此類推
+            let S = new SuperWizard('Jerry');
+            S.attack();
+            S.greeting();
+            S.lv++
+
+            // 只改 S，但從 SuperWizard 讀取
+            console.log(S);
+
+            // 靜態功能
+            SuperWizard.sayHi = function() {
+                console.log('Hi');
+            }
+        </script>
+    </body>
+</html>

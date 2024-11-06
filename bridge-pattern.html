@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>橋接與組合</title>
+    </head>
+    <body>
+        <script>
+            // 行為和對象放一起 =================================
+            function rideMotorcycle () {
+                this.accelerate = function () {
+                    console.log('機車 加速');
+                }
+                this.decelerate = function () {
+                    console.log('機車 減速');
+                }
+            }
+
+            function driveVehicle () {
+                this.accelerate = function () {
+                    console.log('汽車 加速');
+                }
+                this.decelerate = function () {
+                    console.log('汽車 減速');
+                }
+            }
+
+            // 橋接模式 =================================
+            // 對象
+            function Motorcycle () {
+                this.accelerate = function () {
+                    console.log('機車 加速');
+                }
+                this.decelerate = function () {
+                    console.log('機車 減速');
+                }
+            }
+
+            function Vehicle () {
+                this.accelerate = function () {
+                    console.log('汽車 加速');
+                }
+                this.decelerate = function () {
+                    console.log('汽車 減速');
+                }
+            }
+
+            // 行為
+            function Drive (transportation) {
+                this.transportation = transportation;
+                this.accelerate = function () {
+                    this.transportation.accelerate();
+                }
+                this.decelerate = function () {
+                    this.transportation.decelerate();
+                }
+            }
+
+            // 創建 Motorcycle 和 Vehicle 的實例
+            const motorcycle = new Motorcycle();
+            const vehicle = new Vehicle();
+
+            // 創建 Drive 的實例，並傳入 Motorcycle 的實例
+            const scooter = new Drive(motorcycle);
+            scooter.accelerate(); // Output: 機車 加速
+            scooter.decelerate(); // Output: 機車 減速
+        </script>
+    </body>
+</html>

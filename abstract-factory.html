@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>抽象工廠/工廠方法/簡單工廠</title>
+  </head>
+  <body>
+    <script>
+      // 要提前定義好類別，比如說假如都是漢堡類的，都需要 info
+      const hamburger = ({ bread = "滿意麵包", meat = "牛肉排" }) => {
+        return {
+          info() {
+            console.log(`我是用 ${bread} 夾著 ${meat} 的漢堡`);
+          },
+        };
+      };
+      // const h1 = hamburger();
+      // h1.info();
+
+      const bigMac = () => {
+        const h = hamburger({ bread: "大麥克麵包", meat: "雙層牛肉" });
+        return {
+          info() {
+            return h.info();
+          },
+        };
+      };
+      const bigMacHamburger = bigMac();
+      bigMacHamburger.info();
+
+      const mcChicken = () => {
+        const h = hamburger({ bread: "滿意麵包", meat: "香雞排" });
+        return {
+          info() {
+            return h.info();
+          },
+        };
+      };
+      const mcChickenHamburger = mcChicken();
+      mcChickenHamburger.info();
+
+      const mcFish = () => {
+        const h = hamburger({ bread: "滿意麵包", meat: "麥香魚" });
+        return {
+          info() {
+            return h.info();
+          },
+        };
+      };
+      const mcFishHamburger = mcFish();
+      mcFishHamburger.info();
+
+      // 簡單工廠
+      const hamburgerFactory = (type) => {
+        switch (type) {
+          case "大麥克":
+            return bigMac();
+          case "麥香雞":
+            return mcChicken();
+          case "麥香魚":
+            return mcFish();
+          default:
+            return hamburger();
+        }
+      };
+
+      const mch = hamburgerFactory("大麥克");
+
+      const snackFactory = () => {};
+      const drinkFactory = () => {};
+
+      // 抽象工廠：會包含除了漢堡外，可能有點心工廠或飲料工廠等等
+      const mixFactory = (factory) => {
+        switch (factory) {
+          case "漢堡":
+            return hamburgerFactory;
+          case "點心":
+            return snackFactory;
+          case "飲料":
+            return drinkFactory;
+          default:
+            return null;
+        }
+      };
+
+      // 世界漢堡工廠：麥當勞漢堡、肯德基漢堡、漢堡王漢堡
+      // const worldHamburgerFactory = () => {}
+
+      const McDonald = {
+        makeHamburger: mixFactory("漢堡"),
+        makeSnack: mixFactory("點心"),
+        makeDrink: mixFactory("飲料"),
+      };
+
+      // 列表
+      const hamburgerList = {
+        大麥克: bigMac,
+        麥香雞: mcChicken,
+        麥香魚: mcFish,
+      };
+      const snackList = {};
+      const drinkList = {};
+
+      const createFactory = (typeList) => {
+        return (type) => {
+          create: () => {
+            return typeList[type] ? typeList[type]() : null;
+          };
+        };
+      };
+
+      const newHamburgerFactory = createFactory(hamburgerList);
+      const newSnackFactory = createFactory(snackList);
+      const newDrinkFactory = createFactory(drinkList);
+    </script>
+  </body>
+</html>

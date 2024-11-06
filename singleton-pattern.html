@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>單例模式</title>
+    </head>
+    <body>
+        <script>
+            class Obj {
+                constructor() {
+                    this.name = 'Sam';
+                }
+            }
+
+            let a = new Obj();
+            console.log(a);
+
+            a.name = 'Tom'
+            console.log(a);
+
+            class ObjSingleton {
+                // 如果實例不存在，就創建實例
+                constructor () {
+                    if (!ObjSingleton.instance) {
+                        ObjSingleton.instance = new Obj();
+                    }
+                    return ObjSingleton.instance;
+                }
+            }
+
+            let c = new ObjSingleton();
+            console.log(c);
+
+            let d = new ObjSingleton();
+            console.log(c === d);
+
+            // d 也會跟著改
+            c.name = 'Jerry';
+            console.log(d);
+
+            // ObjSingleton 直接寫成建構函式，會有點風險，建議用閉包
+            // 閉包的目的為存和保護 instance，不然原本能直接 ObjSingleton.instance 寫這樣取得
+            const ObjSingletonClosure = (function(){
+                let instance = null
+                return function() {
+                    // 2.判斷
+                    if (!instance) {
+                        // 1.存
+                        instance = new Obj();
+                    }
+                    // 3.返回
+                    return instance;
+                }
+            }())
+
+            let e = new ObjSingletonClosure();
+            console.log(e);
+
+            // instance 已被封裝在裡面，所以會讀不到
+            console.log(ObjSingletonClosure.instance);
+        </script>
+    </body>
+</html>
