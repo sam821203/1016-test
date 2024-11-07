@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const _data = {
+        point: 100
+      }
+
+      // 當 point 被修改時，得到通知
+      // proxy 實現單一職責，和開放封閉修改，就不會影響到原本的 _data 物件
+      const data = new Proxy(_data, {
+        get: (obj, prop) => {
+
+        },
+        set: (obj, prop, value) => {
+          obj[prop] = value
+          console.log('point 被修改了')
+        }
+      })
+      data.point = 60
+    </script>
+  </body>
+</html>

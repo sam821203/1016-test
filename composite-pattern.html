@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 一班談到組合模式，都會搭配著樹狀結構
+      const organization = {
+        name: '處',
+        children: [
+          {
+            name: 'A員工',
+            salary: 10000
+          },
+          {
+            name: 'B員工',
+            salary: 5000
+          },
+          {
+            name: 'C部門',
+            getAllSalary: function () {
+              return this.children.reduce((acc, target) => {
+                if (target.hasOwnProperty('salary')) return acc + target.salary;
+                if (target.hasOwnProperty('getAllSalary')) return acc + target.getAllSalary();
+              }, 0)
+            },
+            children: [
+              {
+                name: 'D員工',
+                salary: 10000
+              },
+              {
+                name: 'E員工',
+                salary: 5000
+              },
+            ],
+          },
+        ],
+      }
+    </script>
+  </body>
+</html>

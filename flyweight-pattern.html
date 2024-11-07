@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const model = (gender) => {
+        return {
+            clothes: null,
+            takePicture: () => {
+                console.log(`${gender}拍照，穿著${this.clothes}`)
+            }
+        }
+      }
+
+      const Men = model('男')
+      const Women = model('女')
+    </script>
+  </body>
+</html>

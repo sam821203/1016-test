@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const A = {
+        function1: () => {
+            console.log('A function1')
+        },
+        function2: () => {
+            console.log('A function2')
+        },
+        function3: () => {
+            console.log('A function3')
+        },
+      }
+
+      const B = {
+        function1: () => {
+            console.log('B function1')
+        },
+        function2: () => {
+            console.log('B function2')
+        },
+        function3: () => {
+            console.log('B function3')
+        },
+      }
+
+      const C = {
+        function1: () => {
+            console.log('C function1')
+        },
+        function2: () => {
+            console.log('C function2')
+        },
+        function3: () => {
+            console.log('C function3')
+        },
+      }
+
+      // 典型的外觀模式，只要一層，就可以將 A、B、C 的方法包裝起來
+      const A1B2C1 = () => {
+        A.function1()
+        B.function2()
+        C.function1()
+      }
+    </script>
+  </body>
+</html>

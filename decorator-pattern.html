@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let redTea = {
+        content: ['紅茶'],
+        price: () => {
+            return 30
+        }
+      }
+
+      const addMilk = (ingradient) => {
+        return {
+          content: [...ingradient.content, '牛奶'],
+          price: () => {
+            return ingradient.price() + 20
+          }
+        }
+      }
+
+      const addBubbles = (tea) => {
+        return {
+          content: [...tea.content, '珍珠'],
+          price: () => {
+            return tea.price() + 10
+          }
+        }
+      }
+
+      // 奶茶
+      let milkTea = addMilk(redTea)
+      // 珍珠奶茶
+      let bubbleMilkTea = addBubbles(milkTea)
+      // 珍珠紅茶
+      let bubbleRedTea = addBubbles(redTea)
+    </script>
+  </body>
+</html>
